@@ -1,0 +1,8 @@
+<h1>My Days</h1>
+<a href="{% url 'day_create' %}">+ Add Day</a>
+
+{% for day in days %}
+  <p><a href="{% url 'day_detail' day.pk %}">{{ day.date }}</a> — {{ day.bodyweight }} lbs</p>
+{% empty %}
+  <p>No days logged yet.</p>
+{% endfor %}

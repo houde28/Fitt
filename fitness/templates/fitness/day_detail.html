@@ -1,0 +1,4 @@
+<h1>{{ day.date }}</h1>
+<p>Bodyweight: {{ day.bodyweight }}</p>
+<a href="{% url 'day_update' day.pk %}">Edit</a>
+<a href="{% url 'day_delete' day.pk %}">Delete</a>
