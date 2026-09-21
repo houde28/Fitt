@@ -1,0 +1,15 @@
+{% extends 'fitness/base.html' %}
+
+{% block content %}
+<h1>All Meals</h1>
+<a href="{% url 'meal_create' %}">+ Add Meal</a>
+
+{% for meal in meals %}
+  <p>
+    <a href="{% url 'meal_detail' meal.pk %}">{{ meal.name }}</a>
+    — {{ meal.calories }} cal, {{ meal.carbs }}c/{{ meal.protein }}p/{{ meal.fat }}f
+  </p>
+{% empty %}
+  <p>No meals logged yet.</p>
+{% endfor %}
+{% endblock %}
