@@ -3,8 +3,6 @@ from .models import Day, Workout, Exercise, Meal
 from django.views.generic import ListView,DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
-
-
 def day_list(request):
     days = Day.objects.all().order_by('-date')
     return render(request, 'fitness/day_list.html', {'days': days})
@@ -14,6 +12,8 @@ class DayListView(ListView):
     template_name = 'fitness/day_list.html'
     context_object_name = 'days'
     ordering = ['-date']
+    def get_queryset(self):
+        return Day.objects.filter(user = self.request.user).order_by('date')
 
 class DayDetailView(DetailView):
     model = Day
@@ -47,12 +47,12 @@ class WorkoutListView(ListView):
 
 class WorkoutDetailView(DetailView):
     model = Workout
-    template_name = 'fitness/workout_form.html'
+    template_name = 'fitness/workout_detail.html'
 
 class WorkoutCreateView(CreateView):
     model = Workout
     fields = ['day']
-    tempalte_name = 'fitness/workout_form.html'
+    template_name = 'fitness/workout_form.html'
     success_url = reverse_lazy('workout_list')
 
 class WorkoutUpdateView(UpdateView):
@@ -103,7 +103,7 @@ class MealDetailView(DetailView):
 
 class MealCreateView(CreateView):
     model = Meal
-    fields = ['day', 'name', 'calories', 'carbs', 'protien', 'fat']
+    fields = ['day', 'name', 'calories', 'carbs', 'protein', 'fat']
     template_name = 'fitness/meal_form.html'
     success_url = reverse_lazy('meal_list')
 
