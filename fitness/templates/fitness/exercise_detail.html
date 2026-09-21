@@ -1,0 +1,9 @@
+<h1>{{ exercise.name }}</h1>
+<p>Weight: {{ exercise.weight }} lbs</p>
+<p>Reps: {{ exercise.reps }}</p>
+<p>Sets: {{ exercise.sets }}</p>
+<p>Part of workout on {{ exercise.workout.day.date }}</p>
+
+<a href="{% url 'exercise_update' exercise.pk %}">Edit</a>
+<a href="{% url 'exercise_delete' exercise.pk}">Delete</a>
+

@@ -1,0 +1,11 @@
+<h1>All Exercises</h1>
+<a href="{% url 'exercise_create' %}">+ Add Exercise</a>
+
+{% for exercise in exercises %}
+    <p>
+        <a href="{% url 'exercise_detail' exercise.pk %}">{{ exercise.name }}</a>
+        - {{ exercise.weight }} lbs x {{ exercise.reps }} reps x {{ exercise.sets }} sets
+    </p>
+{% empty %}
+    <p>No exercises logged yet.</p>
+{% endfor %}

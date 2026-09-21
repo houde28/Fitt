@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fitt</title>
+</head>
+<body>
+    <nav>
+        <a href = "{% url 'day_list' %}">Days</a>
+        <a href = "{% url 'workout_list' %}">Workouts</a>
+        <a href = "{% url 'meal_list' %}">Meals</a>
+        <a href = "{% url 'logout' %}">Log Out</a>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

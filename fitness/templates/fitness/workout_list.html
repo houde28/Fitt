@@ -1,0 +1,10 @@
+<h1>My Workouts</h1>
+<a href="{% url 'workout_create' %}">+ Add Workout</a>
+
+{% for workout in workouts %}
+  <p>
+    <a href="{% url 'workout_detail' workout.pk %}">Workout on {{ workout.day.date }}</a>
+  </p>
+{% empty %}
+  <p>No workouts logged yet.</p>
+{% endfor %}

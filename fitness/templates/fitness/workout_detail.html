@@ -1,0 +1,11 @@
+<h1>Workout on {{ workout.day.date }}</h1>
+
+<h3>Exercises</h3>
+{% for exercise in workout.exercises.all %}
+  <p>{{ exercise.name }} — {{ exercise.weight }} lbs x {{ exercise.reps }} reps x {{ exercise.sets }} sets</p>
+{% empty %}
+  <p>No exercises logged for this workout yet.</p>
+{% endfor %}
+
+<a href="{% url 'workout_update' workout.pk %}">Edit</a>
+<a href="{% url 'workout_delete' workout.pk %}">Delete</a>
