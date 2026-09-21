@@ -3,6 +3,9 @@ from .models import Day, Workout, Exercise, Meal
 from django.views.generic import ListView,DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
+def home(request):
+    return render(request, 'fitness/home.html')
+
 def day_list(request):
     days = Day.objects.all().order_by('-date')
     return render(request, 'fitness/day_list.html', {'days': days})

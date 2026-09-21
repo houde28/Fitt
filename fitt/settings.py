@@ -127,4 +127,4 @@ MAILERS = {
     },
 }
 
-LOGIN_REDIRECT_URL = 'day_list'
+LOGIN_REDIRECT_URL = 'home'

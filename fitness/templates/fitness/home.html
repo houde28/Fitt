@@ -1,0 +1,13 @@
+{% extends 'fitness/base.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+    <h1>Welcome back, {{user.username }}</h1>
+    <p><a href="{% url 'day_list' %}">View Days</a></p>
+    <p><a href="{% url 'workout_list' %}">View Workouts</a></p>
+    <p><a href="{% url 'meal_list' %}">View Meals</a></p>
+{% else %}
+    <h1>Welcome to Fitt</h1>
+    <p><a href="{% url 'login' %}">Log In</a></p>
+{% endif %}
+{% endblock %}
