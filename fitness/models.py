@@ -6,8 +6,15 @@ class Day(models.Model):
     date = models.DateField()
     bodyweight = models.DecimalField(max_digits = 5, decimal_places=2, null = True, blank = True)
 
+    def __str__(self):
+        return str(self.date)
+
+
 class Workout(models.Model):
     day =  models.ForeignKey(Day, on_delete=models.CASCADE, related_name='workouts')
+
+    def __str__(self):
+        return f"Workout on {self.day.date}"
 
 class Exercise(models.Model):
     workout = models.ForeignKey(Workout, on_delete=models.CASCADE, related_name='exercises')
@@ -16,6 +23,9 @@ class Exercise(models.Model):
     reps = models.PositiveSmallIntegerField()
     sets = models.PositiveSmallIntegerField()
 
+    def __str__(self):
+        return self.name
+    
 class Meal(models.Model):
     day = models.ForeignKey(Day, on_delete=models.CASCADE, related_name= 'meals')
     name = models.CharField(max_length=100)
@@ -24,4 +34,6 @@ class Meal(models.Model):
     protein = models.PositiveSmallIntegerField()
     fat = models.PositiveSmallIntegerField()
 
+    def __str__(self):
+        return self.name
 
