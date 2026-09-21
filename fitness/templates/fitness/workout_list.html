@@ -1,3 +1,6 @@
+{% extends 'fitness/base.html' %}
+
+{% block content %}
 <h1>My Workouts</h1>
 <a href="{% url 'workout_create' %}">+ Add Workout</a>
 
@@ -8,3 +11,4 @@
 {% empty %}
   <p>No workouts logged yet.</p>
 {% endfor %}
+{% endblock %}

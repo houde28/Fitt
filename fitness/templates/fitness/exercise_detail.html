@@ -1,3 +1,6 @@
+{% extends 'fitness/base.thml' %}
+
+{% block content %}
 <h1>{{ exercise.name }}</h1>
 <p>Weight: {{ exercise.weight }} lbs</p>
 <p>Reps: {{ exercise.reps }}</p>
@@ -6,4 +9,4 @@
 
 <a href="{% url 'exercise_update' exercise.pk %}">Edit</a>
 <a href="{% url 'exercise_delete' exercise.pk}">Delete</a>
-
+{% endblock %}
