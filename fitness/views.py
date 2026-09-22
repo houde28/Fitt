@@ -15,12 +15,16 @@ class DayListView(ListView):
     template_name = 'fitness/day_list.html'
     context_object_name = 'days'
     ordering = ['-date']
+
     def get_queryset(self):
         return Day.objects.filter(user = self.request.user).order_by('date')
 
 class DayDetailView(DetailView):
     model = Day
     template_name = 'fitness/day_detail.html'
+
+    def get_queryset(self):
+        return Day.objects.filter(user =self.request.user)
 
 class DayCreateView(CreateView):
     model = Day
@@ -38,10 +42,16 @@ class DayUpdateView(UpdateView):
     template_name = 'fitness/day_form.html'
     success_url = reverse_lazy('day_list')
 
+    def get_queryset(self):
+        return Day.objects.filter(user=self.request.user)
+
 class DayDeleteView(DeleteView):
     model = Day
     template_name = 'fitness/day_confirm_delete.html'
     success_url = reverse_lazy('day_list')
+
+    def get_queryset(self):
+        return Day.objects.filter(user=self.request.user)
 
 class WorkoutListView(ListView):
     model = Workout
@@ -55,6 +65,9 @@ class WorkoutDetailView(DetailView):
     model = Workout
     template_name = 'fitness/workout_detail.html'
 
+    def get_queryset(self):
+        return Workout.objects.filter(day__user = self.request.user)
+
 class WorkoutCreateView(CreateView):
     model = Workout
     fields = ['day']
@@ -67,10 +80,16 @@ class WorkoutUpdateView(UpdateView):
     template_name = 'fitness/workout_form.html'
     success_url = reverse_lazy('workout_list')
 
+    def get_queryset(self):
+        return Workout.objects.filter(day__user=self.request.user)
+
 class WorkoutDeleteView(DeleteView):
     model = Workout
     template_name = 'fitness/workout_confirm_delete.html'
     success_url = reverse_lazy('workout_list')
+
+    def get_queryset(self):
+        return Workout.objects.filter(day__user=self.request.user)
 
 class ExerciseListView(ListView):
     model = Exercise
@@ -84,6 +103,9 @@ class ExerciseDetailView(DetailView):
     model = Exercise
     template_name = 'fitness/exercise_detail.html'
 
+    def get_queryset(self):
+        return Exercise.objects.filter(workout__day__user=self.request.user)
+
 class ExerciseCreateView(CreateView):
     model = Exercise 
     fields = ['workout', 'name', 'weight', 'reps', 'sets']
@@ -96,10 +118,16 @@ class ExerciseUpdateView(UpdateView):
     template_name = 'fitness/exercise_form.html'
     success_url = reverse_lazy('exercise_list')
 
+    def get_queryset(self):
+        return Exercise.objects.filter(workout__day__user=self.request.user)
+
 class ExerciseDeleteView(DeleteView):
     model = Exercise
     template_name = 'fitness/exercise_confirm_delete.html'
     success_url = reverse_lazy('exercise_list')
+
+    def get_queryset(self):
+        return Exercise.objects.filter(workout__day__user=self.request.user)
 
 class MealListView(ListView):
     model = Meal
@@ -113,6 +141,9 @@ class MealDetailView(DetailView):
     model = Meal
     template_name = 'fitness/meal_detail.html'
 
+    def get_queryset(self):
+        return Meal.objects.filter(day__user=self.request.user)
+
 class MealCreateView(CreateView):
     model = Meal
     fields = ['day', 'name', 'calories', 'carbs', 'protein', 'fat']
@@ -125,9 +156,15 @@ class MealUpdateView(UpdateView):
     template_name = 'fitness/meal_form.html'
     success_url = reverse_lazy('meal_list')
 
+    def get_queryset(self):
+        return Meal.objects.filter(day__user=self.request)
+
 class MealDeleteView(DeleteView):
     model = Meal
     template_name = 'fitness/meal_confirm_delete.html'
     success_url = reverse_lazy('meal_list')
+
+    def get_queryset(self):
+        return Meal.objects.filter(day__user=self.request)
 
 
