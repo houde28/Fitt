@@ -48,6 +48,9 @@ class WorkoutListView(ListView):
     template_name = 'fitness/workout_list.html'
     context_object_name = 'workouts'
 
+    def get_queryset(self):
+        return Workout.objects.filter(day__user = self.request.user)
+
 class WorkoutDetailView(DetailView):
     model = Workout
     template_name = 'fitness/workout_detail.html'
@@ -74,6 +77,9 @@ class ExerciseListView(ListView):
     template_name = 'fitness/exercise_list.html'
     context_object_name = 'exercises'
 
+    def get_queryset(self):
+        return Exercise.objects.filter(workout__day__user=self.request.user)
+
 class ExerciseDetailView(DetailView):
     model = Exercise
     template_name = 'fitness/exercise_detail.html'
@@ -99,6 +105,9 @@ class MealListView(ListView):
     model = Meal
     template_name = 'fitness/meal_list.html'
     context_object_name = 'meals'
+
+    def get_queryset(self):
+        return Meal.objects.filter(day__user=self.request.user)
 
 class MealDetailView(DetailView):
     model = Meal
