@@ -157,7 +157,7 @@ class MealUpdateView(UpdateView):
     success_url = reverse_lazy('meal_list')
 
     def get_queryset(self):
-        return Meal.objects.filter(day__user=self.request)
+        return Meal.objects.filter(day__user=self.request.user)
 
 class MealDeleteView(DeleteView):
     model = Meal
@@ -165,6 +165,6 @@ class MealDeleteView(DeleteView):
     success_url = reverse_lazy('meal_list')
 
     def get_queryset(self):
-        return Meal.objects.filter(day__user=self.request)
+        return Meal.objects.filter(day__user=self.request.user)
 
 
