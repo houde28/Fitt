@@ -1,7 +1,9 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
     <title>Fitt</title>
+    <link rel="stylesheet" href="{% static 'fitness/style.css' %}">
 </head>
 <body>
     <nav>
@@ -16,8 +18,9 @@
         {% endif %}
     </nav>
     <hr>
-
-    {% block content %}
-    {% endblock %}
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
 </body>
 </html>
