@@ -2,7 +2,27 @@
 
 {% block content %}
 <h1>{{ day.date }}</h1>
-<p>Bodyweight: {{ day.bodyweight }}</p>
-<a href="{% url 'day_update' day.pk %}">Edit</a>
-<a href="{% url 'day_delete' day.pk %}">Delete</a>
+<p>Bodyweight: {{ day.bodyweight }} lbs</p>
+
+<h3>Workouts</h3>
+{% for workout in day.workouts.all %}
+  <p><a href="{% url 'workout_detail' workout.pk %}">Workout</a></p>
+  <ul>
+    {% for exercise in workout.exercises.all %}
+      <li>{{ exercise.name }} — {{ exercise.weight }} lbs x {{ exercise.reps }} reps x {{ exercise.sets }} sets</li>
+    {% endfor %}
+  </ul>
+{% empty %}
+  <p>No workouts logged for this day.</p>
+{% endfor %}
+
+<h3>Meals</h3>
+{% for meal in day.meals.all %}
+  <p>{{ meal.name }} — {{ meal.calories }} cal, {{ meal.carbs }}c/{{ meal.protein }}p/{{ meal.fat }}f</p>
+{% empty %}
+  <p>No meals logged for this day.</p>
+{% endfor %}
+
+<a href="{% url 'day_update' day.pk %}">Edit Day</a>
+<a href="{% url 'day_delete' day.pk %}">Delete Day</a>
 {% endblock %}
