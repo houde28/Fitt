@@ -74,6 +74,11 @@ class WorkoutCreateView(CreateView):
     template_name = 'fitness/workout_form.html'
     success_url = reverse_lazy('workout_list')
 
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        form.fields['day'].queryset = Day.objects.filter(user=self.request.user)
+        return form
+
 class WorkoutUpdateView(UpdateView):
     model = Workout
     fields = ['day']
@@ -82,6 +87,11 @@ class WorkoutUpdateView(UpdateView):
 
     def get_queryset(self):
         return Workout.objects.filter(day__user=self.request.user)
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        form.fields['day'].queryset = Day.objects.filter(user=self.request.user)
+        return form
 
 class WorkoutDeleteView(DeleteView):
     model = Workout
@@ -112,6 +122,11 @@ class ExerciseCreateView(CreateView):
     template_name = 'fitness/exercise_form.html'
     success_url = reverse_lazy('exercise_list')
 
+    def get_form(self, form_class = None):
+        form = super().get_form(form_class)
+        form.fields['workout'].queryset = Workout.objects.filter(day__user=self.request.user)
+        return form
+
 class ExerciseUpdateView(UpdateView):
     model = Exercise
     fields = ['workout', 'name', 'weight', 'reps', 'sets']
@@ -121,6 +136,11 @@ class ExerciseUpdateView(UpdateView):
     def get_queryset(self):
         return Exercise.objects.filter(workout__day__user=self.request.user)
 
+    def get_form(self, form_class = None):
+        form = super().get_form(form_class)
+        form.fields['workout'].queryset = Workout.objects.filter(day__user=self.request.user)
+        return form
+    
 class ExerciseDeleteView(DeleteView):
     model = Exercise
     template_name = 'fitness/exercise_confirm_delete.html'
@@ -150,6 +170,11 @@ class MealCreateView(CreateView):
     template_name = 'fitness/meal_form.html'
     success_url = reverse_lazy('meal_list')
 
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        form.fields['day'].queryset = Day.objects.filter(user=self.request.user)
+        return form
+    
 class MealUpdateView(UpdateView):
     model = Meal
     fields = ['day', 'name', 'calories', 'carbs', 'protein', 'fat']
@@ -159,6 +184,10 @@ class MealUpdateView(UpdateView):
     def get_queryset(self):
         return Meal.objects.filter(day__user=self.request.user)
 
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        form.fields['day'].queryset = Day.objects.filter(user=self.request.user)
+        return form
 class MealDeleteView(DeleteView):
     model = Meal
     template_name = 'fitness/meal_confirm_delete.html'
