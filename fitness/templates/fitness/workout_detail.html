@@ -10,6 +10,8 @@
   <p>No exercises logged for this workout yet.</p>
 {% endfor %}
 
+<a href="{% url 'exercise_create' %}">+ Add Exercise</a>
+
 <a href="{% url 'workout_update' workout.pk %}">Edit</a>
 <a href="{% url 'workout_delete' workout.pk %}">Delete</a>
 {% endblock %}
