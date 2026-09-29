@@ -19,7 +19,7 @@ urlpatterns = [
     path('exercises/<int:pk>/', views.ExerciseDetailView.as_view(), name='exercise_detail'),
     path('exercises/new/', views.ExerciseCreateView.as_view(), name = 'exercise_create'),
     path('exercises/<int:pk>/edit/', views.ExerciseUpdateView.as_view(), name = 'exercise_update'),
-    path('exercises/<int:pk/delete/', views.ExerciseDeleteView.as_view(), name = 'exercise_delete'),
+    path('exercises/<int:pk>/delete/', views.ExerciseDeleteView.as_view(), name = 'exercise_delete'),
 
     path('meals/', views.MealListView.as_view(), name= 'meal_list'),
     path('meals/<int:pk>/', views.MealDetailView.as_view(), name = 'meal_detail'),
